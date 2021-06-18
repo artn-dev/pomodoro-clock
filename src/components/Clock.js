@@ -3,11 +3,15 @@ import ClockOptions from "./ClockOptions"
 import ClockDisplay from "./ClockDisplay"
 
 const Clock = () => {
-    const [isRunning, setIsRunning] = useState(true)
+    const [isRunning, setIsRunning] = useState(false)
     const [time, setTime] = useState(5)
 
     const getMinutes = () => ( Math.floor(time / 60) )
     const getSeconds = () => ( time % 60 )
+
+    const startClock = () => {
+        setIsRunning(true)
+    }
 
     useEffect(() => {
         if (isRunning && time > 0) {
@@ -23,7 +27,7 @@ const Clock = () => {
                 <div className="card-body w-75 py-5 d-flex flex-column align-items-center">
 
                     <ClockDisplay minutes={getMinutes()} seconds={getSeconds()} />
-                    <ClockOptions />
+                    <ClockOptions onStart={startClock} />
 
                 </div>
             </div>
