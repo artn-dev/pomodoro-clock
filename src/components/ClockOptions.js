@@ -15,7 +15,12 @@ const ClockOptions = ({ onStart, onCancel, isActive = false }) => {
           <i className="bi bi-gear"></i>
         </button>
 
-        <button type="button" className="btn btn-success" onClick={onStart}>
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={onStart}
+          disabled={isActive}
+        >
           Start
         </button>
       </div>
