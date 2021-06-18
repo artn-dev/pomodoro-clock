@@ -38,7 +38,7 @@ const Clock = () => {
                 <div className="card-body w-75 py-5 d-flex flex-column align-items-center">
 
                     <ClockDisplay minutes={getMinutes()} seconds={getSeconds()} />
-                    <ClockOptions onStart={startClock} onCancel={resetTime} />
+                    <ClockOptions onStart={startClock} onCancel={resetTime} isActive={isRunning} />
 
                 </div>
             </div>
