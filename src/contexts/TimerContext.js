@@ -13,8 +13,8 @@ export const TimerContextProvider = ({ children }) => {
     const [sessionIsDone, setSessionIsDone] = useState(false)
     const [time, setTime] = useState(sessionTime)
 
-    const getMinutes = () => ( Math.floor(time / 60) )
-    const getSeconds = () => ( time % 60 )
+    const minutes = Math.floor(time / 60)
+    const seconds = time % 60
 
     const startClock = () => {
         setIsRunning(true)
@@ -52,8 +52,8 @@ export const TimerContextProvider = ({ children }) => {
     return(
         <TimerContext.Provider
             value={{
-                getMinutes,
-                getSeconds,
+                minutes,
+                seconds,
                 startClock,
                 resetTime,
                 isRunning
