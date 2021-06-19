@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { TimerContext } from '../contexts/TimerContext'
-import SessionTimeSlider from "./TimeSlider"
+import TimeSlider from "./TimeSlider"
 
 
 const ConfigureTimeModal = () => {
@@ -38,14 +38,14 @@ const ConfigureTimeModal = () => {
                     </div>
                     <div className="modal-body">
 
-                        <SessionTimeSlider
+                        <TimeSlider
                             minuteValue={minSession}
                             onChangeMin={setMinSession}
                             secondValue={secSession}
                             onChangeSec={setSecSession}
                         />
 
-                        <SessionTimeSlider
+                        <TimeSlider
                             minuteValue={minBreak}
                             onChangeMin={setMinBreak}
                             secondValue={secBreak}

@@ -1,4 +1,4 @@
-const SessionTimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec }) => {
+const TimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec }) => {
     return (
         <form>
             <div className="d-flex">
@@ -35,4 +35,4 @@ const SessionTimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec 
     )
 }
 
-export default SessionTimeSlider 
+export default TimeSlider 
