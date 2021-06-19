@@ -42,9 +42,17 @@ const SessionTimeSlider = ({
 }
 
 const ConfigureTimeModal = () => {
-    const { sessionTime, setSessionTime } = useContext(TimerContext)
+    const {
+        sessionTime,
+        setSessionTime,
+        breakTime,
+        setBreakTime
+    } = useContext(TimerContext)
+
     const [minSession, setMinSession] = useState(Math.floor(sessionTime / 60))
     const [secSession, setSecSession] = useState(sessionTime % 60)
+    const [minBreak, setMinBreak] = useState(Math.floor(breakTime / 60))
+    const [secBreak, setSecBreak] = useState(breakTime % 60)
 
     return (
         <>
@@ -67,13 +75,21 @@ const ConfigureTimeModal = () => {
                         ></button>
                     </div>
                     <div className="modal-body">
-                    
+
                         <SessionTimeSlider
                             minuteValue={minSession}
                             onChangeMin={setMinSession}
                             secondValue={secSession}
                             onChangeSec={setSecSession}
                         />
+
+                        <SessionTimeSlider
+                            minuteValue={minBreak}
+                            onChangeMin={setMinBreak}
+                            secondValue={secBreak}
+                            onChangeSec={setSecBreak}
+                        />
+
                     </div>
                     <div className="modal-footer">
                         <button
@@ -82,6 +98,7 @@ const ConfigureTimeModal = () => {
                             data-bs-dismiss="modal"
                             onClick={() => {
                                 setSessionTime(minSession * 60 + secSession)
+                                setBreakTime(minBreak * 60 + secBreak)
                             }}
                         >
                             Save changes
