@@ -80,6 +80,9 @@ const ConfigureTimeModal = () => {
                             type="button"
                             className="btn btn-primary"
                             data-bs-dismiss="modal"
+                            onClick={() => {
+                                setSessionTime(minSession * 60 + secSession)
+                            }}
                         >
                             Save changes
                         </button>
