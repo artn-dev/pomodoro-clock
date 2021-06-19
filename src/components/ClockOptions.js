@@ -17,7 +17,13 @@ const ClockOptions = () => {
           Cancel
         </button>
 
-        <button type="button" className="btn btn-secondary">
+        <button
+          type="button"
+          className="btn btn-secondary"
+          data-bs-toggle="modal"
+          data-bs-target="#configureTimeModal"
+          disabled={isRunning}
+        >
           <i className="bi bi-gear"></i>
         </button>
 
