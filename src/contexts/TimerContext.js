@@ -6,15 +6,14 @@ export const TimerContext = createContext({})
 var countDownTimeout
 
 export const TimerContextProvider = ({ children }) => {
-    const sessionTime = 5
-    const breakTime = 3
-
+    const [sessionTime, setSessionTime] = useState(5)
+    const [breakTime, setBreakTime] = useState(3)
+    const [currentTime, setCurrentTime] = useState(sessionTime)
     const [isRunning, setIsRunning] = useState(false)
     const [sessionIsDone, setSessionIsDone] = useState(false)
-    const [time, setTime] = useState(sessionTime)
 
-    const minutes = Math.floor(time / 60)
-    const seconds = time % 60
+    const minutes = Math.floor(currentTime / 60)
+    const seconds = currentTime % 60
 
     const startClock = () => {
         setIsRunning(true)
@@ -22,7 +21,7 @@ export const TimerContextProvider = ({ children }) => {
 
     const resetTime = () => {
         clearTimeout(countDownTimeout)
-        setTime(sessionTime)
+        setCurrentTime(sessionTime)
         setIsRunning(false)
         setSessionIsDone(false)
     }
@@ -32,14 +31,14 @@ export const TimerContextProvider = ({ children }) => {
         if (!isRunning)
             return
 
-        if (time > 0) {
-            countDownTimeout = setTimeout(() => { setTime(time - 1) }, 1000)
+        if (currentTime > 0) {
+            countDownTimeout = setTimeout(() => { setCurrentTime(currentTime - 1) }, 1000)
             return
         } 
 
         if (!sessionIsDone) {
             setTimeout(() => {
-                setTime(breakTime)
+                setCurrentTime(breakTime)
                 setSessionIsDone(true)
             }, 1000)
             return
@@ -47,7 +46,7 @@ export const TimerContextProvider = ({ children }) => {
 
         resetTime()
 
-    }, [isRunning, time, sessionIsDone])
+    }, [isRunning, currentTime, sessionIsDone])
 
     return(
         <TimerContext.Provider
@@ -56,7 +55,11 @@ export const TimerContextProvider = ({ children }) => {
                 seconds,
                 startClock,
                 resetTime,
-                isRunning
+                isRunning,
+                sessionTime,
+                setSessionTime,
+                breakTime,
+                setBreakTime
         }}>
             {children}
         </TimerContext.Provider>
