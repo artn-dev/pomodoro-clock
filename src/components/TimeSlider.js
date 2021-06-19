@@ -12,6 +12,8 @@ const TimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec, label 
                 type="range"
                 className="form-range"
                 id="sessionMinuteSlider"
+                min="0"
+                max="99"
                 value={minuteValue}
                 onChange={(event) => {
                     onChangeMin(parseInt(event.target.value))
@@ -28,6 +30,8 @@ const TimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec, label 
                 className="form-range"
                 id="sessionSecondSlider"
                 value={secondValue}
+                min="0"
+                max="59"
                 onChange={(event) => {
                     onChangeSec(parseInt(event.target.value))
                 }}
