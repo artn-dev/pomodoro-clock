@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { TimerContext } from '../contexts/TimerContext'
 
 
-const ClockOptions = ({ onStart, onCancel, isActive = false }) => {
+const ClockOptions = () => {
   const { startClock, resetTime, isRunning } = useContext(TimerContext)
 
   return (
