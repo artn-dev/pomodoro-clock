@@ -4,10 +4,12 @@ import { createContext, useState, useEffect } from 'react'
 export const TimerContext = createContext({})
 
 var countDownTimeout
+const defaultSessionTime = 25 * 60
+const defaultBreakTime = 5 * 60
 
 export const TimerContextProvider = ({ children }) => {
-    const [sessionTime, setSessionTime] = useState(5)
-    const [breakTime, setBreakTime] = useState(3)
+    const [sessionTime, setSessionTime] = useState(defaultSessionTime)
+    const [breakTime, setBreakTime] = useState(defaultBreakTime)
     const [currentTime, setCurrentTime] = useState(sessionTime)
     const [isRunning, setIsRunning] = useState(false)
     const [sessionIsDone, setSessionIsDone] = useState(false)
