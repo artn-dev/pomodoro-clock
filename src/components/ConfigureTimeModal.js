@@ -18,27 +18,17 @@ const ConfigureTimeModal = () => {
 
     return (
         <>
-        <div
-            className="modal fade"
-            id="configureTimeModal"
-            tabIndex="-1"
-            aria-labelledby="configuraTimeModal"
-            aria-hidden="true"
-        >
+        <div className="modal fade" id="configureTimeModal" tabIndex="-1" aria-labelledby="configuraTimeModal" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Configure Time</h5>
-                        <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        ></button>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
 
                         <TimeSlider
+                            label="Session"
                             minuteValue={minSession}
                             onChangeMin={setMinSession}
                             secondValue={secSession}
@@ -46,6 +36,7 @@ const ConfigureTimeModal = () => {
                         />
 
                         <TimeSlider
+                            label="Break"
                             minuteValue={minBreak}
                             onChangeMin={setMinBreak}
                             secondValue={secBreak}

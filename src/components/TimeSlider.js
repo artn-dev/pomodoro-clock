@@ -1,6 +1,7 @@
-const TimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec }) => {
+const TimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec, label }) => {
     return (
-        <form>
+        <form className="mb-4">
+            <h5 className="display-6">{label}</h5>
             <div className="d-flex">
                 <label htmlFor="sessionMinuteSlider" className="form-label">Minutes</label>
                 <p className="ms-auto border rounded px-2">
