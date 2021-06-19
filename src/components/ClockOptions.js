@@ -1,12 +1,18 @@
+import { useContext } from 'react'
+import { TimerContext } from '../contexts/TimerContext'
+
+
 const ClockOptions = ({ onStart, onCancel, isActive = false }) => {
+  const { startClock, resetTime, isRunning } = useContext(TimerContext)
+
   return (
     <>
       <div className="btn-group btn-group-lg" role="group" aria-label="Clock Options">
         <button
           type="button"
           className="btn btn-danger"
-          onClick={onCancel}
-          disabled={!isActive}
+          onClick={resetTime}
+          disabled={!isRunning}
         >
           Cancel
         </button>
@@ -18,8 +24,8 @@ const ClockOptions = ({ onStart, onCancel, isActive = false }) => {
         <button
           type="button"
           className="btn btn-success"
-          onClick={onStart}
-          disabled={isActive}
+          onClick={startClock}
+          disabled={isRunning}
         >
           Start
         </button>
