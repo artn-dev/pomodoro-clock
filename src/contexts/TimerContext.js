@@ -27,6 +27,10 @@ export const TimerContextProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        setCurrentTime(sessionTime)
+    }, [sessionTime])
+
+    useEffect(() => {
 
         if (!isRunning)
             return
