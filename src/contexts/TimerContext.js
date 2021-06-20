@@ -56,6 +56,10 @@ export const TimerContextProvider = ({ children }) => {
         if (!isRunning) {
             return
         }
+    
+        if (currentTime == 0) {
+            new Audio("/alarm-tone1.wav").play()
+        }
 
         if (currentTime >= 0) {
             updateTime()
