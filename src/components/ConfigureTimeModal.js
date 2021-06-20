@@ -8,13 +8,23 @@ const ConfigureTimeModal = () => {
         sessionTime,
         setSessionTime,
         breakTime,
-        setBreakTime
+        setBreakTime,
+        saveSettings
     } = useContext(TimerContext)
 
     const [minSession, setMinSession] = useState(Math.floor(sessionTime / 60))
     const [secSession, setSecSession] = useState(sessionTime % 60)
     const [minBreak, setMinBreak] = useState(Math.floor(breakTime / 60))
     const [secBreak, setSecBreak] = useState(breakTime % 60)
+
+    const onSave = () => {
+        const newSessionTime = minSession * 60 + secSession
+        const newBreakTime = minBreak * 60 + secBreak
+
+        setSessionTime(newSessionTime)
+        setBreakTime(newBreakTime)
+        saveSettings(newSessionTime, newBreakTime)
+    }
 
     return (
         <>
@@ -49,10 +59,7 @@ const ConfigureTimeModal = () => {
                             type="button"
                             className="btn btn-primary"
                             data-bs-dismiss="modal"
-                            onClick={() => {
-                                setSessionTime(minSession * 60 + secSession)
-                                setBreakTime(minBreak * 60 + secBreak)
-                            }}
+                            onClick={onSave}
                         >
                             Save changes
                         </button>

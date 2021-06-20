@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react'
+import { useCookies } from 'react-cookie'
 
 
 export const TimerContext = createContext({})
@@ -8,8 +9,14 @@ const defaultSessionTime = 25 * 60
 const defaultBreakTime = 5 * 60
 
 export const TimerContextProvider = ({ children }) => {
-    const [sessionTime, setSessionTime] = useState(defaultSessionTime)
-    const [breakTime, setBreakTime] = useState(defaultBreakTime)
+    const [cookie, setCookie] = useCookies(["sessionTime, breakTime"])
+
+    const [sessionTime, setSessionTime] = useState(
+        cookie.sessionTime ? cookie.sessionTime : defaultSessionTime
+    )
+    const [breakTime, setBreakTime] = useState(
+        cookie.breakTime ? cookie.breakTime : defaultBreakTime
+    )
     const [currentTime, setCurrentTime] = useState(sessionTime)
     const [isRunning, setIsRunning] = useState(false)
     const [sessionIsDone, setSessionIsDone] = useState(false)
@@ -32,6 +39,13 @@ export const TimerContextProvider = ({ children }) => {
         countDownTimeout = setTimeout(() => {
             setCurrentTime(currentTime - 1)
         }, 1000)
+    }
+
+    const saveSettings = (newSessionTime, newBreakTime) => {
+        if (newSessionTime)
+            setCookie("sessionTime", newSessionTime, { path: "/" })
+        if (newBreakTime)
+            setCookie("breakTime", newBreakTime, { path: "/" })
     }
 
     useEffect(() => {
@@ -80,7 +94,8 @@ export const TimerContextProvider = ({ children }) => {
                 sessionTime,
                 setSessionTime,
                 breakTime,
-                setBreakTime
+                setBreakTime,
+                saveSettings
         }}>
             {children}
         </TimerContext.Provider>
