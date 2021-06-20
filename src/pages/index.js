@@ -1,7 +1,7 @@
-import Clock from './components/Clock'
+import Clock from '../components/Clock'
 import { CookiesProvider } from 'react-cookie'
 
-function App() {
+function Home() {
   return (
     <>
       <CookiesProvider>
@@ -17,4 +17,4 @@ function App() {
   )
 }
 
-export default App
+export default Home
