@@ -1,5 +1,5 @@
 import App from 'next/app'
-import './index.css'
+import '../styles/index.css'
 
 
 const MyApp = ({ Component, pageProps }) => {
