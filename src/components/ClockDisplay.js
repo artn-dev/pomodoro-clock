@@ -5,6 +5,12 @@ import { TimerContext } from '../contexts/TimerContext'
 const ClockDisplay = () => {
     const { minutes, seconds } = useContext(TimerContext)
 
+    const fixDigits = (time) => {
+        if (time < 0)
+            return "00"
+        return (time < 10 ? "0" : "") + time
+    }
+
     return (
         <>
             <div
@@ -13,7 +19,7 @@ const ClockDisplay = () => {
                     minWidth: 300
             }}>
                 <p className="m-0 font-monospace">
-                    {minutes < 10 && "0"}{minutes}:{seconds < 10 && "0"}{seconds}
+                    {fixDigits(minutes)}:{fixDigits(seconds)}
                 </p>
             </div>
         </>
