@@ -12,7 +12,7 @@ Para usar a aplicação, é preciso ter [npm](https://nodejs.org/en/download/) i
 
 ```bash
     npm install
-    npm start
+    npm run dev
 ```
 
 ## Feito com
@@ -24,6 +24,6 @@ Para usar a aplicação, é preciso ter [npm](https://nodejs.org/en/download/) i
 ## TODO
 
 - [ ] Migrar linguagem para [Typescript](https://www.typescriptlang.org/)
-- [ ] Migrar para [Next.js](https://nextjs.org/), framework de React
+- [x] Migrar para [Next.js](https://nextjs.org/), framework de React
 - [ ] Publicar projeto pela [Vercel](https://vercel.com/)
 - [ ] Implementar gerenciamento de estado com [Redux](https://redux.js.org/)
