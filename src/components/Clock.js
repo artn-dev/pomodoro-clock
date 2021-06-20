@@ -8,9 +8,15 @@ const Clock = () => {
     return (
         <>
             <TimerContextProvider>
-                <ClockDisplay />
-                <ClockOptions />
-                <ConfigureTimeModal />
+                <div className="container-fluid">
+                    <div className="row">
+                        <ClockDisplay />
+                    </div>
+                    <div className="row">
+                        <ClockOptions />
+                        <ConfigureTimeModal />
+                    </div>
+                </div>
             </TimerContextProvider>
         </>
     )
