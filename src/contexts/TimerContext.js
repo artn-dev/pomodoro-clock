@@ -48,12 +48,11 @@ export const TimerContextProvider = ({ children }) => {
             setCookie("breakTime", newBreakTime, { path: "/" })
     }
 
-    useEffect(() => {
+    const handleSessionTimeChange = () => {
         setCurrentTime(sessionTime)
+    }
 
-    }, [sessionTime])
-
-    useEffect(() => {
+    const handleCurrentTimeChange = () => {
         if (!isRunning) {
             return
         }
@@ -70,18 +69,20 @@ export const TimerContextProvider = ({ children }) => {
 
         setCurrentTime(breakTime - 1)
         setSessionIsDone(true)
+    }
 
-    }, [currentTime])
-
-    useEffect(() => {
+    const handleIsRunningChange = () => {
         if (isRunning) {
             updateTime()
             return
         }
 
         clearTimeout(countDownTimeout)
+    }
 
-    }, [isRunning])
+    useEffect(handleSessionTimeChange, [sessionTime])
+    useEffect(handleCurrentTimeChange, [currentTime])
+    useEffect(handleIsRunningChange, [isRunning])
 
     return(
         <TimerContext.Provider
