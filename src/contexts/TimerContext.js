@@ -28,31 +28,46 @@ export const TimerContextProvider = ({ children }) => {
         setSessionIsDone(false)
     }
 
+    const updateTime = () => {
+        countDownTimeout = setTimeout(() => {
+            setCurrentTime(currentTime - 1)
+        }, 1000)
+    }
+
     useEffect(() => {
         setCurrentTime(sessionTime)
+
     }, [sessionTime])
 
     useEffect(() => {
-
-        if (!isRunning)
-            return
-
-        if (currentTime > 0) {
-            countDownTimeout = setTimeout(() => { setCurrentTime(currentTime - 1) }, 1000)
-            return
-        } 
-
-        if (!sessionIsDone) {
-            setTimeout(() => {
-                setCurrentTime(breakTime)
-                setSessionIsDone(true)
-            }, 1000)
+        if (!isRunning) {
             return
         }
 
-        resetTime()
+        if (currentTime >= 0) {
+            updateTime()
+            return
+        } 
+        
+        if(sessionIsDone) {
+            resetTime()
+            return
+        } 
 
-    }, [isRunning, currentTime, sessionIsDone])
+        setCurrentTime(breakTime - 1)
+        setSessionIsDone(true)
+
+    }, [currentTime])
+
+    useEffect(() => {
+        if (isRunning) {
+            updateTime()
+            return
+        }
+
+        clearTimeout(countDownTimeout)
+
+    }, [isRunning])
 
     return(
         <TimerContext.Provider
