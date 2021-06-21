@@ -1,3 +1,6 @@
+import { START } from '../actions/Types'
+
+
 export interface ClockReducerState {
     currentTime: number
     sessionTime: number
@@ -16,6 +19,8 @@ const initialState = {
 
 const ClockReducer = (state: ClockReducerState = initialState, action) => {
     switch (action.type) {
+    case START:
+        return { ...state, isActive: true }
     default:
         return state
     }
