@@ -1,9 +1,18 @@
-import { useContext } from 'react'
-import { TimerContext } from '../contexts/TimerContext'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { ClockReducerState } from '../reducers/ClockReducer'
 
 
 const ClockDisplay = () => {
-    const { minutes, seconds } = useContext(TimerContext)
+    const currentTime = useSelector((state: ClockReducerState) => (state.currentTime))
+
+    const [minutes, setMinutes] = useState<number>()
+    const [seconds, setSeconds] = useState<number>()
+
+    useEffect(() => {
+        setMinutes(Math.floor(currentTime / 60))
+        setSeconds(currentTime % 60)
+    }, [currentTime])
 
     const fixDigits = (time: number) => {
         if (time < 0)
@@ -27,3 +36,4 @@ const ClockDisplay = () => {
 }
 
 export default ClockDisplay
+
