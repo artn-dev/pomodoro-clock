@@ -1,22 +1,26 @@
-import { useContext, useState, useEffect } from "react"
+import { useContext, useState } from "react"
 import { TimerContext } from '../contexts/TimerContext'
 import TimeSlider from "./TimeSlider"
+import { ClockReducerState } from "../reducers/ClockReducer"
+import { useSelector, useDispatch } from "react-redux"
+import { changeSessionTime } from "../actions/ClockActions"
 
 
 const ConfigureTimeModal = () => {
     const {
-        sessionTime,
-        setSessionTime,
         breakTime,
         setBreakTime,
         saveSettings
     } = useContext(TimerContext)
 
+    const sessionTime = useSelector((state: ClockReducerState) => (state.sessionTime))
+    const dispatch = useDispatch()
+
     const [inSessionTime, setInSessionTime] = useState<number>(sessionTime)
     const [inBreakTime, setInBreakTime] = useState<number>(breakTime)
 
     const onSave = () => {
-        setSessionTime(inSessionTime)
+        dispatch(changeSessionTime(inSessionTime))
         setBreakTime(inBreakTime)
         saveSettings(inSessionTime, inBreakTime)
     }
