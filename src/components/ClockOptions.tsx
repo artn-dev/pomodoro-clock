@@ -1,11 +1,10 @@
-import { useContext } from 'react'
-import { useDispatch } from 'react-redux'
-import { TimerContext } from '../contexts/TimerContext'
+import { useDispatch, useSelector } from 'react-redux'
 import { start, reset } from '../actions/ClockActions'
+import { ClockReducerState } from '../reducers/ClockReducer'
 
 
 const ClockOptions = () => {
-  const { startClock, resetTime, isRunning } = useContext(TimerContext)
+  const isActive = useSelector((state: ClockReducerState) => (state.isActive))
   const dispatch = useDispatch()
 
   return (
@@ -15,7 +14,7 @@ const ClockOptions = () => {
           type="button"
           className="btn btn-danger"
           onClick={() => { dispatch(reset()) }}
-          disabled={!isRunning}
+          disabled={!isActive}
         >
           <i className="bi bi-stop-circle"></i>
         </button>
@@ -25,7 +24,7 @@ const ClockOptions = () => {
           className="btn btn-secondary"
           data-bs-toggle="modal"
           data-bs-target="#configureTimeModal"
-          disabled={isRunning}
+          disabled={isActive}
         >
           <i className="bi bi-gear"></i>
         </button>
@@ -34,7 +33,7 @@ const ClockOptions = () => {
           type="button"
           className="btn btn-success"
           onClick={() => { dispatch(start()) }}
-          disabled={isRunning}
+          disabled={isActive}
         >
           <i className="bi bi-play-circle"></i>
         </button>
