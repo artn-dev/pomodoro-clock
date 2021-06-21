@@ -2,7 +2,7 @@ import { useState } from "react"
 import TimeSlider from "./TimeSlider"
 import { ClockReducerState } from "../reducers/ClockReducer"
 import { useSelector, useDispatch } from "react-redux"
-import { changeTimeConfig, saveTimeConfig } from "../actions/ClockActions"
+import { changeTimeConfig, saveTimeConfig, reset } from "../actions/ClockActions"
 
 
 const ConfigureTimeModal = () => {
@@ -15,6 +15,7 @@ const ConfigureTimeModal = () => {
 
     const onSave = () => {
         dispatch(changeTimeConfig(inSessionTime, inBreakTime))
+        dispatch(reset())
         dispatch(saveTimeConfig(inSessionTime, inBreakTime))
     }
 
