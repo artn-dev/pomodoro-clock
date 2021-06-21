@@ -1,6 +1,7 @@
 import Clock from '../components/Clock'
 import { CookiesProvider } from 'react-cookie'
 
+
 function Home() {
   return (
     <>

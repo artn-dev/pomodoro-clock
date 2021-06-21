@@ -5,7 +5,7 @@ import { TimerContext } from '../contexts/TimerContext'
 const ClockDisplay = () => {
     const { minutes, seconds } = useContext(TimerContext)
 
-    const fixDigits = (time) => {
+    const fixDigits = (time: number) => {
         if (time < 0)
             return "00"
         return (time < 10 ? "0" : "") + time

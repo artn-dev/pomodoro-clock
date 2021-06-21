@@ -1,25 +1,44 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState, useEffect, ReactNode } from 'react'
 import { useCookies } from 'react-cookie'
 
 
-export const TimerContext = createContext({})
+interface TimeContextProps {
+    minutes: number
+    seconds: number
+    isRunning: boolean
+    sessionTime: number
+    breakTime: number
+    startClock: () => void
+    resetTime: () => void
+    setSessionTime: (arg: number) => void
+    setBreakTime: (arg: number) => void
+    saveSettings: (arg1: number, arg2: number) => void
+}
 
-var countDownTimeout
+interface TimerContextProviderProps {
+    children?: ReactNode
+}
+
+
+export const TimerContext = createContext({} as TimeContextProps)
+
+var countDownTimeout: NodeJS.Timeout
+
 const defaultSessionTime = 25 * 60
 const defaultBreakTime = 5 * 60
 
-export const TimerContextProvider = ({ children }) => {
+export const TimerContextProvider = ({ children }: TimerContextProviderProps) => {
     const [cookie, setCookie] = useCookies(["sessionTime, breakTime"])
 
-    const [sessionTime, setSessionTime] = useState(
+    const [sessionTime, setSessionTime] = useState<number>(
         cookie.sessionTime ? cookie.sessionTime : defaultSessionTime
     )
-    const [breakTime, setBreakTime] = useState(
+    const [breakTime, setBreakTime] = useState<number>(
         cookie.breakTime ? cookie.breakTime : defaultBreakTime
     )
-    const [currentTime, setCurrentTime] = useState(sessionTime)
-    const [isRunning, setIsRunning] = useState(false)
-    const [sessionIsDone, setSessionIsDone] = useState(false)
+    const [currentTime, setCurrentTime] = useState<number>(sessionTime)
+    const [isRunning, setIsRunning] = useState<boolean>(false)
+    const [sessionIsDone, setSessionIsDone] = useState<boolean>(false)
 
     const minutes = Math.floor(currentTime / 60)
     const seconds = currentTime % 60
@@ -41,7 +60,7 @@ export const TimerContextProvider = ({ children }) => {
         }, 1000)
     }
 
-    const saveSettings = (newSessionTime, newBreakTime) => {
+    const saveSettings = (newSessionTime: number, newBreakTime: number) => {
         if (newSessionTime)
             setCookie("sessionTime", newSessionTime, { path: "/" })
         if (newBreakTime)

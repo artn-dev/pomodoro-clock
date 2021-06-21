@@ -12,10 +12,10 @@ const ConfigureTimeModal = () => {
         saveSettings
     } = useContext(TimerContext)
 
-    const [minSession, setMinSession] = useState(Math.floor(sessionTime / 60))
-    const [secSession, setSecSession] = useState(sessionTime % 60)
-    const [minBreak, setMinBreak] = useState(Math.floor(breakTime / 60))
-    const [secBreak, setSecBreak] = useState(breakTime % 60)
+    const [minSession, setMinSession] = useState<number>(Math.floor(sessionTime / 60))
+    const [secSession, setSecSession] = useState<number>(sessionTime % 60)
+    const [minBreak, setMinBreak] = useState<number>(Math.floor(breakTime / 60))
+    const [secBreak, setSecBreak] = useState<number>(breakTime % 60)
 
     const onSave = () => {
         const newSessionTime = minSession * 60 + secSession
@@ -28,7 +28,7 @@ const ConfigureTimeModal = () => {
 
     return (
         <>
-        <div className="modal fade" id="configureTimeModal" tabIndex="-1" aria-labelledby="configuraTimeModal" aria-hidden="true">
+        <div className="modal fade" id="configureTimeModal" tabIndex={-1} aria-labelledby="configuraTimeModal" aria-hidden="true">
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">

@@ -1,4 +1,16 @@
-const TimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec, label }) => {
+import { ChangeEvent } from 'react'
+
+
+interface TimeSliderProps {
+    minuteValue: number
+    secondValue: number
+    label: string
+    onChangeMin: (arg: number) => void
+    onChangeSec: (arg: number) => void
+}
+
+
+const TimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec, label }: TimeSliderProps) => {
     return (
         <form className="mb-4">
             <h5 className="display-6">{label}</h5>
@@ -15,7 +27,7 @@ const TimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec, label 
                 min="0"
                 max="99"
                 value={minuteValue}
-                onChange={(event) => {
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
                     onChangeMin(parseInt(event.target.value))
             }}/>
 

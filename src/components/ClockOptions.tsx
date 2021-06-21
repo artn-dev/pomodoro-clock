@@ -14,7 +14,7 @@ const ClockOptions = () => {
           onClick={resetTime}
           disabled={!isRunning}
         >
-          <i class="bi bi-stop-circle"></i>
+          <i className="bi bi-stop-circle"></i>
         </button>
 
         <button
@@ -33,7 +33,7 @@ const ClockOptions = () => {
           onClick={startClock}
           disabled={isRunning}
         >
-          <i class="bi bi-play-circle"></i>
+          <i className="bi bi-play-circle"></i>
         </button>
       </div>
     </>
