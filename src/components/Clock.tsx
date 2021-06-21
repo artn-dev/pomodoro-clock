@@ -3,7 +3,7 @@ import ClockOptions from "./ClockOptions"
 import ClockDisplay from "./ClockDisplay"
 import ConfigureTimeModal from './ConfigureTimeModal'
 import { useSelector, useDispatch } from 'react-redux'
-import { update } from '../actions/ClockActions'
+import { update, beginBreak, reset } from '../actions/ClockActions'
 import { ClockReducerState } from '../reducers/ClockReducer'
 import { useEffect, useState } from 'react'
 
@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 const Clock = () => {
     const isActive = useSelector((state: ClockReducerState) => (state.isActive))
     const currentTime = useSelector((state: ClockReducerState) => (state.currentTime))
+    const sessionIsDone = useSelector((state: ClockReducerState) => (state.sessionIsDone))
     const dispatch = useDispatch()
     const [clockTimeout, setClockTimeout] = useState<NodeJS.Timeout>()
 
@@ -20,15 +21,26 @@ const Clock = () => {
         )
     }
 
-    useEffect(() => {
+    const timeUpdateEffect = () => {
         if (!isActive) {
             clearTimeout(clockTimeout)
             return
         }
 
-        updateTime()
+        if (currentTime >= 0) {
+            updateTime()
+            return
+        }
 
-    }, [isActive, currentTime])
+        if (sessionIsDone) {
+            dispatch(reset())
+            return
+        }
+
+        dispatch(beginBreak())
+    }
+
+    useEffect(timeUpdateEffect, [isActive, currentTime, sessionIsDone])
 
     return (
         <>
