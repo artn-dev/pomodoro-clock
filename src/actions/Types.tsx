@@ -1,4 +1,5 @@
 export const START  = 'START'
 export const UPDATE = 'UPDATE'
 export const RESET  = 'RESET'
+export const BEGIN_BREAK = 'BEGIN_BREAK'
 export const CHANGE_SESSION = 'CHANGE_SESSION'
