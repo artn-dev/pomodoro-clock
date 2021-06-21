@@ -26,6 +26,10 @@ const Clock = () => {
             return
         }
 
+        if (currentTime == 0) {
+            new Audio('/alarm-tone.wav').play()
+        }
+
         if (currentTime >= 0) {
             updateTime()
             return
