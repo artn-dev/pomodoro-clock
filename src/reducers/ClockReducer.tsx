@@ -1,4 +1,4 @@
-import { START, UPDATE, RESET, BEGIN_BREAK, CHANGE_TIME_CONFIG } from '../actions/Types'
+import { START, UPDATE, RESET, BEGIN_BREAK, CHANGE_TIME_CONFIG, SAVE_TIME_CONFIG } from '../actions/Types'
 import Cookie from 'js-cookie'
 
 
@@ -40,6 +40,9 @@ const ClockReducer = (state: ClockReducerState, action) => {
         return { ...state, currentTime: state.breakTime - 1, sessionIsDone: true }
     case CHANGE_TIME_CONFIG:
         return { ...state, sessionTime: action.session, breakTime: action.break }
+    case SAVE_TIME_CONFIG:
+        Cookie.set('sessionTime', action.session, { path: '' })
+        Cookie.set('breakTime', action.break, { path: ''})
     default:
         return state
     }
