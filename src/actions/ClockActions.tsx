@@ -7,6 +7,6 @@ export const reset  = () => ({ type: RESET })
 export const beginBreak = () => ({ type: BEGIN_BREAK})
 export const changeTimeConfig = (session: number, break_: number) => ({
     type: CHANGE_TIME_CONFIG,
-    session: session,
-    break: break_
+    session: session + 1,
+    break: break_ + 1
 })
