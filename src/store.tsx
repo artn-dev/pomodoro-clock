@@ -1,5 +1,5 @@
 import { createStore } from 'redux'
-import ClockReducer from './reducers/ClockReducer'
+import ClockReducer, { getInitialState} from './reducers/ClockReducer'
 
 
-export const store = createStore(ClockReducer)
+export const store = createStore(ClockReducer, getInitialState())
