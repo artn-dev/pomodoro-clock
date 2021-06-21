@@ -1,9 +1,12 @@
 import { useContext } from 'react'
+import { useDispatch } from 'react-redux'
 import { TimerContext } from '../contexts/TimerContext'
+import { start, reset } from '../actions/ClockActions'
 
 
 const ClockOptions = () => {
   const { startClock, resetTime, isRunning } = useContext(TimerContext)
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -11,7 +14,7 @@ const ClockOptions = () => {
         <button
           type="button"
           className="btn btn-danger"
-          onClick={resetTime}
+          onClick={() => { dispatch(reset()) }}
           disabled={!isRunning}
         >
           <i className="bi bi-stop-circle"></i>
@@ -30,7 +33,7 @@ const ClockOptions = () => {
         <button
           type="button"
           className="btn btn-success"
-          onClick={startClock}
+          onClick={() => { dispatch(start()) }}
           disabled={isRunning}
         >
           <i className="bi bi-play-circle"></i>
