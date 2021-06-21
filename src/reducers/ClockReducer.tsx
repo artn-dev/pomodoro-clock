@@ -1,4 +1,4 @@
-import { START, UPDATE, RESET } from '../actions/Types'
+import { START, UPDATE, RESET, CHANGE_SESSION } from '../actions/Types'
 
 
 export interface ClockReducerState {
@@ -25,6 +25,8 @@ const ClockReducer = (state: ClockReducerState = initialState, action) => {
         return { ...state, currentTime: state.currentTime - 1}
     case RESET:
         return { ...state, currentTime: state.sessionTime, isActive: false }
+    case CHANGE_SESSION:
+        return { ...state, sessionTime: action.time }
     default:
         return state
     }
