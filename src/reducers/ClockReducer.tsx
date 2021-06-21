@@ -1,4 +1,4 @@
-import { START, UPDATE, RESET, CHANGE_SESSION, BEGIN_BREAK } from '../actions/Types'
+import { START, UPDATE, RESET, BEGIN_BREAK, CHANGE_TIME_CONFIG } from '../actions/Types'
 
 
 export interface ClockReducerState {
@@ -27,8 +27,8 @@ const ClockReducer = (state: ClockReducerState = initialState, action) => {
         return { ...state, currentTime: state.sessionTime, isActive: false, sessionIsDone: false }
     case BEGIN_BREAK:
         return { ...state, currentTime: state.breakTime - 1, sessionIsDone: true }
-    case CHANGE_SESSION:
-        return { ...state, sessionTime: action.time }
+    case CHANGE_TIME_CONFIG:
+        return { ...state, sessionTime: action.session, breakTime: action.break }
     default:
         return state
     }

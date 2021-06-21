@@ -1,8 +1,12 @@
-import { START, UPDATE, RESET, CHANGE_SESSION, BEGIN_BREAK } from "./Types";
+import { START, UPDATE, RESET, BEGIN_BREAK, CHANGE_TIME_CONFIG } from "./Types";
 
 
 export const start  = () => ({ type: START })
 export const update = () => ({ type: UPDATE })
 export const reset  = () => ({ type: RESET })
 export const beginBreak = () => ({ type: BEGIN_BREAK})
-export const changeSessionTime = (newTime: number) => ({ type: CHANGE_SESSION  , time: newTime })
+export const changeTimeConfig = (session: number, break_: number) => ({
+    type: CHANGE_TIME_CONFIG,
+    session: session,
+    break: break_
+})
