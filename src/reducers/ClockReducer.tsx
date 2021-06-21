@@ -1,4 +1,5 @@
 import { START, UPDATE, RESET, BEGIN_BREAK, CHANGE_TIME_CONFIG } from '../actions/Types'
+import Cookie from 'js-cookie'
 
 
 export interface ClockReducerState {
@@ -9,15 +10,25 @@ export interface ClockReducerState {
     sessionIsDone: boolean
 }
 
-const initialState = {
-    currentTime: 15 * 60,
-    sessionTime: 25 * 60,
-    breakTime: 5 * 60,
-    isActive: false,
-    sessionIsDone: false
+
+export const getInitialState = () => {
+    const defaultSession = 25 * 60
+    const defaultBreak = 25 * 60
+
+    const savedSession = Cookie.get('sessionTime')
+    const savedBreak = Cookie.get('breakTime')
+
+    return {
+        currentTime: savedSession ? savedSession : defaultSession,
+        sessionTime: savedSession ? savedSession : defaultSession,
+        breakTime: savedBreak ? savedBreak : defaultBreak,
+        isActive: false,
+        sessionIsDone: false
+    }
 }
 
-const ClockReducer = (state: ClockReducerState = initialState, action) => {
+
+const ClockReducer = (state: ClockReducerState, action) => {
     switch (action.type) {
     case START:
         return { ...state, isActive: true }
