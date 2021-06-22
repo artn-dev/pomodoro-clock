@@ -4,20 +4,13 @@ import TimeSlider from "./TimeSlider"
 
 
 const ConfigureTimeModal = () => {
-    const {
-        sessionTime,
-        setSessionTime,
-        breakTime,
-        setBreakTime,
-        saveSettings
-    } = useContext(TimerContext)
+    const { sessionTime, breakTime, changeSettings, saveSettings } = useContext(TimerContext)
 
     const [inSessionTime, setInSessionTime] = useState<number>(sessionTime)
     const [inBreakTime, setInBreakTime] = useState<number>(breakTime)
 
     const onSave = () => {
-        setSessionTime(inSessionTime)
-        setBreakTime(inBreakTime)
+        changeSettings(inSessionTime, inBreakTime)
         saveSettings(inSessionTime, inBreakTime)
     }
 

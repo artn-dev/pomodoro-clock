@@ -13,6 +13,7 @@ interface TimeContextProps {
     setSessionTime: (arg: number) => void
     setBreakTime: (arg: number) => void
     saveSettings: (arg1: number, arg2: number) => void
+    changeSettings: (arg1: number, arg2: number) => void
 }
 
 interface TimerContextProviderProps {
@@ -67,6 +68,13 @@ export const TimerContextProvider = ({ children }: TimerContextProviderProps) =>
             setCookie("breakTime", newBreakTime, { path: "/" })
     }
 
+    const changeSettings = (newSessionTime: number, newBreakTime: number) => {
+        if (newSessionTime)
+            setSessionTime(newSessionTime)
+        if (newBreakTime)
+            setBreakTime(newBreakTime)
+    }
+
     const handleSessionTimeChange = () => {
         setCurrentTime(sessionTime)
     }
@@ -119,7 +127,8 @@ export const TimerContextProvider = ({ children }: TimerContextProviderProps) =>
                 setSessionTime,
                 breakTime,
                 setBreakTime,
-                saveSettings
+                saveSettings,
+                changeSettings
         }}>
             {children}
         </TimerContext.Provider>
