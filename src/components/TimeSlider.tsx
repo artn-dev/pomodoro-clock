@@ -1,23 +1,24 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 
 interface TimeSliderProps {
-    minuteValue: number
-    secondValue: number
     label: string
-    onChangeMin: (arg: number) => void
-    onChangeSec: (arg: number) => void
+    time:number
+    onChange: (arg: number) => void
 }
 
 
-const TimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec, label }: TimeSliderProps) => {
+const TimeSlider = ({ time, onChange, label }: TimeSliderProps) => {
+    const [minutes, setminutes] = useState<number>(Math.floor(time / 60))
+    const [seconds, setseconds] = useState<number>(time % 60)
+
     return (
         <form className="mb-4">
             <h5 className="display-6">{label}</h5>
             <div className="d-flex">
                 <label htmlFor="sessionMinuteSlider" className="form-label">Minutes</label>
                 <p className="ms-auto border rounded px-2">
-                    {minuteValue < 10 && 0}{minuteValue}
+                    {minutes < 10 && 0}{minutes}
                 </p>
             </div>
             <input
@@ -26,30 +27,35 @@ const TimeSlider = ({ minuteValue, onChangeMin, secondValue, onChangeSec, label 
                 id="sessionMinuteSlider"
                 min="0"
                 max="99"
-                value={minuteValue}
+                value={minutes}
                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                    onChangeMin(parseInt(event.target.value))
+                    const newmin = parseInt(event.target.value)
+                    setminutes(newmin)
+                    onChange(newmin * 60 + seconds)
             }}/>
 
             <div className="d-flex">
                 <label htmlFor="sessionSecondSlider" className="form-label">Seconds</label>
                 <p className="ms-auto border rounded px-2">
-                    {secondValue < 10 && 0}{secondValue}
+                    {seconds < 10 && 0}{seconds}
                 </p>
             </div>
             <input
                 type="range"
                 className="form-range"
                 id="sessionSecondSlider"
-                value={secondValue}
+                value={seconds}
                 min="0"
                 max="59"
-                onChange={(event) => {
-                    onChangeSec(parseInt(event.target.value))
+                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                    const newSec = parseInt(event.target.value)
+                    setseconds(newSec)
+                    onChange(minutes * 60 + newSec)
                 }}
             />
         </form>
     )
 }
+
 
 export default TimeSlider 

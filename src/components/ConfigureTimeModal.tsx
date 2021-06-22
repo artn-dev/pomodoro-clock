@@ -12,18 +12,13 @@ const ConfigureTimeModal = () => {
         saveSettings
     } = useContext(TimerContext)
 
-    const [minSession, setMinSession] = useState<number>(Math.floor(sessionTime / 60))
-    const [secSession, setSecSession] = useState<number>(sessionTime % 60)
-    const [minBreak, setMinBreak] = useState<number>(Math.floor(breakTime / 60))
-    const [secBreak, setSecBreak] = useState<number>(breakTime % 60)
+    const [inSessionTime, setInSessionTime] = useState<number>(sessionTime)
+    const [inBreakTime, setInBreakTime] = useState<number>(breakTime)
 
     const onSave = () => {
-        const newSessionTime = minSession * 60 + secSession
-        const newBreakTime = minBreak * 60 + secBreak
-
-        setSessionTime(newSessionTime)
-        setBreakTime(newBreakTime)
-        saveSettings(newSessionTime, newBreakTime)
+        setSessionTime(inSessionTime)
+        setBreakTime(inBreakTime)
+        saveSettings(inSessionTime, inBreakTime)
     }
 
     return (
@@ -37,21 +32,8 @@ const ConfigureTimeModal = () => {
                     </div>
                     <div className="modal-body">
 
-                        <TimeSlider
-                            label="Session"
-                            minuteValue={minSession}
-                            onChangeMin={setMinSession}
-                            secondValue={secSession}
-                            onChangeSec={setSecSession}
-                        />
-
-                        <TimeSlider
-                            label="Break"
-                            minuteValue={minBreak}
-                            onChangeMin={setMinBreak}
-                            secondValue={secBreak}
-                            onChangeSec={setSecBreak}
-                        />
+                        <TimeSlider label="Session" time={inSessionTime} onChange={setInSessionTime} />
+                        <TimeSlider label="Break" time={inBreakTime} onChange={setInBreakTime} />
 
                     </div>
                     <div className="modal-footer">
