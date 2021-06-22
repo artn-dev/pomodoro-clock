@@ -12,13 +12,21 @@ const TimeSlider = ({ time, onChange, label }: TimeSliderProps) => {
     const [minutes, setminutes] = useState<number>(Math.floor(time / 60))
     const [seconds, setseconds] = useState<number>(time % 60)
 
+    const fixDigit = (time: number) => {
+        if (time <= 0)
+            return "00"
+        
+        const firstDigit = time < 10 ?  "0" : ""
+        return firstDigit + time.toString()
+    }
+
     return (
         <form className="mb-4">
             <h5 className="display-6">{label}</h5>
             <div className="d-flex">
                 <label htmlFor="sessionMinuteSlider" className="form-label">Minutes</label>
                 <p className="ms-auto border rounded px-2">
-                    {minutes < 10 && 0}{minutes}
+                    {fixDigit(minutes)}
                 </p>
             </div>
             <input
@@ -37,7 +45,7 @@ const TimeSlider = ({ time, onChange, label }: TimeSliderProps) => {
             <div className="d-flex">
                 <label htmlFor="sessionSecondSlider" className="form-label">Seconds</label>
                 <p className="ms-auto border rounded px-2">
-                    {seconds < 10 && 0}{seconds}
+                    {fixDigit(seconds)}
                 </p>
             </div>
             <input
