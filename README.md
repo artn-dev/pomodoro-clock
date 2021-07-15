@@ -5,6 +5,10 @@
 
 # Pomodoro Clock
 
+<p align="center">
+    <img src=".github/screenshot.png" alt="App screenshot" />
+</p>
+
 Aplicação web com cronômetro para marcar o tempo da técnica de Pomodoro. Pomodoro Clock é um pequeno projeto para praticar o desenvolvimento com React
 
 ## Como usar
@@ -31,4 +35,4 @@ Para usar a aplicação, é preciso ter [npm](https://nodejs.org/en/download/) i
 - [x] Migrar linguagem para [Typescript](https://www.typescriptlang.org/)
 - [x] Migrar para [Next.js](https://nextjs.org/)
 - [ ] Publicar projeto pela [Vercel](https://vercel.com/)
-- [ ] Implementar gerenciamento de estado com [Redux](https://redux.js.org/)
+- [ ] ~~Implementar gerenciamento de estado com [Redux](https://redux.js.org/)~~
